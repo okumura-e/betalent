@@ -1,51 +1,50 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   SafeAreaView,
   View,
   Text,
   TextInput,
-  Image,
-  StyleSheet,
-  TouchableOpacity,
 } from 'react-native';
+import styles from './styles';
 import { Feather } from '@expo/vector-icons';
 import Header from '@/components/header';
 import EmployeesTable from '@/components/employeesTable';
-
-// Dados dos funcionários
-const employees = [
-  {
-    id: '1',
-    name: 'Giovana L. Arruda',
-    avatar: 'https://v0.dev/placeholder.svg?height=40&width=40',
-    role: 'Desenvolvedora Frontend',
-    admissionDate: '15/03/2022',
-    phone: '(11) 99999-1234',
-  },
-  {
-    id: '2',
-    name: 'Vanessa Machado',
-    avatar: 'https://v0.dev/placeholder.svg?height=40&width=40',
-    role: 'UX Designer',
-    admissionDate: '22/06/2021',
-    phone: '(11) 99999-5678',
-  },
-  // ... adicione os dados dos outros funcionários aqui
-];
+import api from '@/service/api';
+import * as T from './types';
 
 export default function TabLayout() {
   const [searchText, setSearchText] = useState('');
+  const [employees, setEmployees] = useState<T.Employee[]>([]);
+  const [filteredEmployees, setFilteredEmployees] = useState<T.Employee[]>([]);
+  
+  const loadEmployees = async () => {
+    try {
+      const { data: employeesList } = await api.get<T.Employee[]>('employees');
+      setEmployees(employeesList);
+      setFilteredEmployees(employeesList);
+    } catch {
+      console.warn('Error loading employees');
+    }
+  };
 
-  // Função para filtrar funcionários
-  const filteredEmployees = employees.filter((employee) => {
-    const searchLower = searchText.toLowerCase();
-    return (
-      employee.name.toLowerCase().includes(searchLower) ||
-      employee.role.toLowerCase().includes(searchLower) ||
-      employee.phone.includes(searchText)
-    );
-  });
+  useEffect(() => {
+    loadEmployees();
+  }, []);
 
+  useEffect(() => {
+    if (searchText === '') loadEmployees();
+    const filterEmployees = () => {
+      const lowerSearchText = searchText.toLowerCase();
+      return employees.filter(
+        ({ name, job, phone }) =>
+          name.toLowerCase().includes(lowerSearchText) ||
+          job.toLowerCase().includes(lowerSearchText) ||
+          phone.includes(searchText)
+      );
+    };
+    setFilteredEmployees(filterEmployees());
+  }, [searchText]);
+ 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
@@ -65,45 +64,10 @@ export default function TabLayout() {
           />
         </View>
 
-      {/* lista */}
-      <EmployeesTable employees={employees}/>
-      
+        {/* lista */}
+        <EmployeesTable employees={filteredEmployees} />
+
       </View>
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  content: {
-    flex: 1,
-    margin: 16,
-  },
-  title: {
-    fontFamily: 'Helvetica Neue',
-    fontSize: 20,
-    fontWeight: '500',
-    marginLeft: 16,
-    marginBottom: 16,
-  },
-  searchContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#F8FAFB',
-    marginHorizontal: 16,
-    borderRadius: 6,
-    paddingHorizontal: 12,
-    marginBottom: 16,
-  },
-  searchIcon: {
-    marginRight: 8,
-  },
-  searchInput: {
-    flex: 1,
-    paddingVertical: 10,
-    fontSize: 14,
-  },
-});
