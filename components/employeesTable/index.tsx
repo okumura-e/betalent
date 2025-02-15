@@ -1,30 +1,43 @@
 import { Feather } from '@expo/vector-icons';
 import { useState } from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, Image } from 'react-native';
+import { Employee } from '../../app/(home)/types'
+import styles from './styles';
 
-interface TableProps {
-    employees: any[]
-}
-
-export default function EmployeesTable({ employees }: TableProps) {
+export default function EmployeesTable({ employees }: { employees: Employee[] }) {
     const [expandedId, setExpandedId] = useState<string | null>(null);
+    
+    const formatData = (data: string, type: string) => {
+        if (type === "date") {
+            const date = new Date(data);
+            const day = `0${date.getDate()}`.slice(-2);
+            const month = `0${date.getMonth() + 1}`.slice(-2);
+            const year = date.getFullYear();
+            return `${day}/${month}/${year}`;
+        } else {
+            const number = data.replace(/\D/g, '');
+            const areaCode = number.slice(0, 2);
+            const prefix = number.slice(2, 4);
+            const line = number.slice(4);
+            return `+${areaCode} (${prefix})${data[4]} ${line.slice(1, 5)}-${line.slice(5)}`;
+        }
+    };
 
-    const EmployeeDetails = ({ employee }: { employee: any }) => (
+    const EmployeeDetails = ({ employee }: { employee: Employee }) => (
         <View style={styles.detailsContainer}>
             <View style={styles.detailsContent}>
-                <Image source={{ uri: employee.avatar }} style={styles.detailsAvatar} />
                 <View style={styles.detailsInfo}>
                     <View style={styles.detailRow}>
                         <Text style={styles.detailLabel}>Cargo:</Text>
-                        <Text style={styles.detailValue}>{employee.role}</Text>
+                        <Text style={styles.detailValue}>{employee.job}</Text>
                     </View>
                     <View style={styles.detailRow}>
                         <Text style={styles.detailLabel}>Admissão:</Text>
-                        <Text style={styles.detailValue}>{employee.admissionDate}</Text>
+                        <Text style={styles.detailValue}>{formatData(employee.admission_date, "date")}</Text>
                     </View>
                     <View style={styles.detailRow}>
                         <Text style={styles.detailLabel}>Telefone:</Text>
-                        <Text style={styles.detailValue}>{employee.phone}</Text>
+                        <Text style={styles.detailValue}>{formatData(employee.phone, "phone")}</Text>
                     </View>
                 </View>
             </View>
@@ -43,12 +56,12 @@ export default function EmployeesTable({ employees }: TableProps) {
                 data={employees}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) => (
-                    <View>
+                    <View style={styles.employeeItem}>
                         <TouchableOpacity
                             style={styles.employeeRow}
                             onPress={() => setExpandedId(expandedId === item.id ? null : item.id)}
                         >
-                            <Image source={{ uri: item.avatar }} style={styles.avatar} />
+                            <Image source={{ uri: item.image }} style={styles.avatar} />
                             <Text style={styles.employeeName}>{item.name}</Text>
                             <Feather
                                 name={expandedId === item.id ? "chevron-up" : "chevron-down"}
@@ -63,83 +76,3 @@ export default function EmployeesTable({ employees }: TableProps) {
         </View>
     )
 }
-
-const styles = StyleSheet.create({
-    listHeader: {
-        flexDirection: 'row',
-        paddingHorizontal: 16,
-        paddingVertical: 8,
-        backgroundColor: '#EDEFFB',
-        borderWidth: 1,
-        borderColor: '#DFDFDF',
-        borderTopLeftRadius: 8,
-        borderTopRightRadius: 8,
-    },
-    columnHeader: {
-        fontSize: 14,
-        color: '#666',
-        width: 60,
-    },
-    nameColumn: {
-        flex: 1,
-    },
-    lastColumn: {
-        width: 20,
-        fontWeight: '500',
-        fontSize: 16,
-        color: '#1C1C1C'
-    },
-    employeeRow: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        paddingHorizontal: 16,
-        paddingVertical: 10,
-        borderWidth: 1,
-        borderTopWidth: 0,
-        borderColor: '#DFDFDF',
-    },
-    avatar: {
-        width: 32,
-        height: 32,
-        borderRadius: 16,
-        marginRight: 12,
-    },
-    employeeName: {
-        flex: 1,
-        fontSize: 14,
-        color: '#333',
-    },
-    detailsContainer: {
-        backgroundColor: '#F8F9FE',
-        paddingHorizontal: 16,
-        paddingVertical: 12,
-    },
-    detailsContent: {
-        flexDirection: 'row',
-        alignItems: 'flex-start',
-    },
-    detailsAvatar: {
-        width: 60,
-        height: 60,
-        borderRadius: 30,
-        marginRight: 16,
-    },
-    detailsInfo: {
-        flex: 1,
-    },
-    detailRow: {
-        flexDirection: 'row',
-        marginBottom: 8,
-    },
-    detailLabel: {
-        width: 80,
-        fontSize: 14,
-        color: '#666',
-        fontWeight: '500',
-    },
-    detailValue: {
-        flex: 1,
-        fontSize: 14,
-        color: '#333',
-    },
-});
