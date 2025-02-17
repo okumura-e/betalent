@@ -1,8 +1,22 @@
-# Welcome to your Expo app 👋
+# Welcome to the Betalent Challenge Project!
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+This is a mobile app project created with Expo, a platform for developing mobile apps that allows you to create apps for Android, iOS, and the web.
 
-## Get started
+## About the Project
+
+The goal of this project is to create an app that allows users to view and interact with a list of employees. The app is divided into different sections, including a home screen, an employee list screen, and an employee details screen.
+
+## Technologies Used
+
+* Expo: a platform for developing mobile apps
+* React Native: a framework for developing mobile apps
+* JavaScript: the programming language used to develop the app
+* TypeScript: the programming language used to develop the app
+* React: a library of components used to develop the app
+
+## How to Start
+
+Open the terminal and run the command below to install the necessary dependencies:
 
 1. Install dependencies
 
@@ -16,35 +30,22 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
     npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+   This will start the app on a local development server.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+### 3. Open the App on an Emulator or Physical Device
+To open the app on an emulator or physical device, you will need to follow the steps below:
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+Web: just click W in the terminal
+Android: open the Android Studio emulator and run the command npx expo start --android.
+iOS: open the Xcode emulator and run the command npx expo start --ios.
+Physical Device: download the Expo Go app on your physical device ([`android `](https://play.google.com/store/apps/details?id=host.exp.exponent&hl=pt_BR) or [`IOS `](https://apps.apple.com/br/app/expo-go/id982107779)) and scan the QR code that will appear in the terminal when you run the app.
 
-## Get a fresh project
+### Project Structure
+The project is divided into different folders and files, including:
 
-When you're ready, run:
+* app: folder that contains the app files
+* components: folder that contains the reusable components of the app
+* constants: folder that contains the app constants
+* db.json: file that contains the app data
+* package.json: file that contains the app dependencies and scripts
 
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
