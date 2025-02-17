@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { Colors } from '../../constants/Colors';
 
 const styles = StyleSheet.create({
   listHeader: {
@@ -7,7 +8,7 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     backgroundColor: "#EDEFFB",
     borderWidth: 1,
-    borderColor: "#DFDFDF",
+    borderColor: Colors.secondaryColors.gray10Neutral,
     borderTopLeftRadius: 8,
     borderTopRightRadius: 8,
   },
@@ -20,16 +21,17 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   lastColumn: {
-    width: 20,
+    width: 10,
+    justifyContent: "center",
     fontWeight: "500",
     fontSize: 16,
-    color: "#1C1C1C",
+    color: Colors.secondaryColors.blackNeutral,
   },
   employeeItem: {
     paddingHorizontal: 1,
     borderWidth: 1,
     borderTopWidth: 0,
-    borderColor: "#DFDFDF",
+    borderColor: Colors.secondaryColors.gray10Neutral,
   },
   employeeRow: {
     flexDirection: "row",
@@ -72,17 +74,17 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginBottom: 8,
     borderBottomWidth: 1,
-    borderColor: "#DFDFDF",
+    borderColor: Colors.secondaryColors.gray10Neutral,
     borderStyle: "dashed",
 
   },
   detailLabel: {
     fontSize: 14,
-    color: "#1C1C1C",
+    color: Colors.secondaryColors.blackNeutral,
     fontWeight: "500",
   },
   detailValue: {
-    color: "#1C1C1C",
+    color: Colors.secondaryColors.blackNeutral,
     fontWeight: 400,
     fontSize: 16,
     lineHeight: 19.09,

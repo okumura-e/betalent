@@ -1,8 +1,9 @@
 import { Feather } from '@expo/vector-icons';
 import { useState } from 'react';
 import { View, Text, FlatList, TouchableOpacity, Image } from 'react-native';
-import { Employee } from '../../app/(home)/types'
+import Employee from '../../app/(home)/types'
 import styles from './styles';
+import Octicons from '@expo/vector-icons/Octicons';
 
 export default function EmployeesTable({ employees }: { employees: Employee[] }) {
     const [expandedId, setExpandedId] = useState<string | null>(null);
@@ -49,7 +50,7 @@ export default function EmployeesTable({ employees }: { employees: Employee[] })
             <View style={styles.listHeader}>
                 <Text style={styles.columnHeader}>Foto</Text>
                 <Text style={[styles.columnHeader, styles.nameColumn]}>Nome</Text>
-                <Text style={[styles.columnHeader, styles.lastColumn]}>•</Text>
+                <View style={[styles.columnHeader, styles.lastColumn]}><Octicons name="dot-fill" size={10} color="black" /></View>
             </View>
 
             <FlatList

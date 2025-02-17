@@ -10,16 +10,16 @@ import { Feather } from '@expo/vector-icons';
 import Header from '@/components/header';
 import EmployeesTable from '@/components/employeesTable';
 import api from '@/service/api';
-import * as T from './types';
+import Employee from './types';
 
 export default function TabLayout() {
   const [searchText, setSearchText] = useState('');
-  const [employees, setEmployees] = useState<T.Employee[]>([]);
-  const [filteredEmployees, setFilteredEmployees] = useState<T.Employee[]>([]);
+  const [employees, setEmployees] = useState<Employee[]>([]);
+  const [filteredEmployees, setFilteredEmployees] = useState<Employee[]>([]);
   
   const loadEmployees = async () => {
     try {
-      const { data: employeesList } = await api.get<T.Employee[]>('employees');
+      const { data: employeesList } = await api.get<Employee[]>('employees');
       setEmployees(employeesList);
       setFilteredEmployees(employeesList);
     } catch {
@@ -49,7 +49,6 @@ export default function TabLayout() {
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
 
-        {/* header  */}
         <Header />
         <Text style={styles.title}>Funcionários</Text>
 
@@ -64,7 +63,6 @@ export default function TabLayout() {
           />
         </View>
 
-        {/* lista */}
         <EmployeesTable employees={filteredEmployees} />
 
       </View>

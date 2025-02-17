@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { Colors } from '../../constants/Colors';
 
 const styles = StyleSheet.create({
     header: {
@@ -12,7 +13,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: '500',
         borderRadius: 50,
-        backgroundColor: '#F5F5F5',
+        backgroundColor: Colors.secondaryColors.gray07Neutral,
         width: 45,
         height: 45,
         alignItems: 'center',
@@ -25,7 +26,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         right: -4,
         top: -4,
-        backgroundColor: '#0066FF',
+        backgroundColor: Colors.primaryColors.bluePrimary,
         borderRadius: 50,
         width: 20,
         height: 20,
@@ -33,7 +34,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     badgeText: {
-        color: '#fff',
+        color: Colors.secondaryColors.whiteNeutral,
         fontSize: 10,
         fontWeight: '700',
     },
