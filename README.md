@@ -24,7 +24,13 @@ Open the terminal and run the command below to install the necessary dependencie
    npm install
    ```
 
-2. Start the app
+2. Start the json-server
+
+   ```bash
+    json-server --watch db.json
+   ```
+
+3. Start the app in another terminal
 
    ```bash
     npx expo start

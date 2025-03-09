@@ -46,11 +46,11 @@ export default function EmployeesTable({ employees }: { employees: Employee[] })
     );
 
     return (
-        <View>
+        <View  style={styles.employeeTable}>
             <View style={styles.listHeader}>
-                <Text style={styles.columnHeader}>Foto</Text>
-                <Text style={[styles.columnHeader, styles.nameColumn]}>Nome</Text>
-                <View style={[styles.columnHeader, styles.lastColumn]}><Octicons name="dot-fill" size={10} color="black" /></View>
+                <Text style={styles.columnHeader}>FOTO</Text>
+                <Text style={[styles.columnHeader, styles.nameColumn]}>NOME</Text>
+                <View style={[styles.columnHeader, styles.lastColumn]}><Octicons name="dot-fill" size={10} color="white" /></View>
             </View>
 
             <FlatList

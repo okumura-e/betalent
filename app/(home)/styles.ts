@@ -8,7 +8,8 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    margin: 16,
+    backgroundColor: "#F0F0F0",
+    gap: 24,
   },
   title: {
     fontFamily: "Helvetica Neue",
@@ -16,6 +17,7 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     marginLeft: 16,
     marginBottom: 16,
+    paddingHorizontal: 20,
   },
   searchContainer: {
     flexDirection: "row",

@@ -16,7 +16,7 @@ export default function TabLayout() {
   const [searchText, setSearchText] = useState('');
   const [employees, setEmployees] = useState<Employee[]>([]);
   const [filteredEmployees, setFilteredEmployees] = useState<Employee[]>([]);
-  
+
   const loadEmployees = async () => {
     try {
       const { data: employeesList } = await api.get<Employee[]>('employees');
@@ -44,26 +44,28 @@ export default function TabLayout() {
     };
     setFilteredEmployees(filterEmployees());
   }, [searchText]);
- 
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
-
         <Header />
-        <Text style={styles.title}>Funcionários</Text>
+        
+        <View>
+          <Text style={styles.title}>Funcionários</Text>
 
-        <View style={styles.searchContainer}>
-          <Feather name="search" size={16} color="#1C1C1C" style={styles.searchIcon} />
-          <TextInput
-            style={styles.searchInput}
-            placeholder="Pesquisar"
-            placeholderTextColor="#999"
-            value={searchText}
-            onChangeText={setSearchText}
-          />
+          <View style={styles.searchContainer}>
+            <TextInput
+              style={styles.searchInput}
+              placeholder="Pesquisar"
+              placeholderTextColor="#999"
+              value={searchText}
+              onChangeText={setSearchText}
+            />
+            <Feather name="search" size={16} color="#DFDFDF" style={styles.searchIcon} />
+          </View>
+
+          <EmployeesTable employees={filteredEmployees} />
         </View>
-
-        <EmployeesTable employees={filteredEmployees} />
 
       </View>
     </SafeAreaView>

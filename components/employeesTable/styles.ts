@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     paddingHorizontal: 16,
     paddingVertical: 8,
-    backgroundColor: "#EDEFFB",
+    backgroundColor: Colors.primaryColors.bluePrimary,
     borderWidth: 1,
     borderColor: Colors.secondaryColors.gray10Neutral,
     borderTopLeftRadius: 8,
@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
   },
   columnHeader: {
     fontSize: 14,
-    color: "#666",
+    color: Colors.secondaryColors.whiteNeutral,
     width: 60,
   },
   nameColumn: {
@@ -27,11 +27,15 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: Colors.secondaryColors.blackNeutral,
   },
+  employeeTable: {
+    paddingHorizontal: 20,
+  },
   employeeItem: {
     paddingHorizontal: 1,
     borderWidth: 1,
     borderTopWidth: 0,
     borderColor: Colors.secondaryColors.gray10Neutral,
+    backgroundColor: Colors.secondaryColors.whiteNeutral,
   },
   employeeRow: {
     flexDirection: "row",
