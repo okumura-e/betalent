@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import { Colors } from "../../constants/Colors";
+import { isMobile } from 'react-device-detect';
 
 const styles = StyleSheet.create({
   container: {
@@ -10,6 +11,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#F0F0F0",
     gap: 24,
+  },
+  titleContainer: {
+    flexDirection: isMobile ? "column" : "row",
+    justifyContent: "space-between",
   },
   title: {
     fontFamily: "Helvetica Neue",

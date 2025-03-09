@@ -4,10 +4,11 @@ import { View, Text, FlatList, TouchableOpacity, Image } from 'react-native';
 import Employee from '../../app/(home)/types'
 import styles from './styles';
 import Octicons from '@expo/vector-icons/Octicons';
+import { isMobile } from 'react-device-detect';
 
 export default function EmployeesTable({ employees }: { employees: Employee[] }) {
     const [expandedId, setExpandedId] = useState<string | null>(null);
-    
+
     const formatData = (data: string, type: string) => {
         if (type === "date") {
             const date = new Date(data);
@@ -46,11 +47,18 @@ export default function EmployeesTable({ employees }: { employees: Employee[] })
     );
 
     return (
-        <View  style={styles.employeeTable}>
+        <View style={styles.employeeTable}>
             <View style={styles.listHeader}>
                 <Text style={styles.columnHeader}>FOTO</Text>
                 <Text style={[styles.columnHeader, styles.nameColumn]}>NOME</Text>
-                <View style={[styles.columnHeader, styles.lastColumn]}><Octicons name="dot-fill" size={10} color="white" /></View>
+                {!isMobile && (
+                    <>
+                        <Text style={[styles.columnHeader, styles.nameColumn]}>CARGO</Text>
+                        <Text style={[styles.columnHeader, styles.nameColumn]}>DATA DE ADMISSÃO</Text>
+                        <Text style={[styles.columnHeader, styles.nameColumn]}>TELEFONE</Text>
+                    </>
+                )}
+                {isMobile && (<View style={[styles.columnHeader, styles.lastColumn]}><Octicons name="dot-fill" size={10} color="white" /></View>)}
             </View>
 
             <FlatList
@@ -60,15 +68,24 @@ export default function EmployeesTable({ employees }: { employees: Employee[] })
                     <View style={styles.employeeItem}>
                         <TouchableOpacity
                             style={styles.employeeRow}
-                            onPress={() => setExpandedId(expandedId === item.id ? null : item.id)}
+                            onPress={isMobile ? () => setExpandedId(expandedId === item.id ? null : item.id) : undefined}
                         >
                             <Image source={{ uri: item.image }} style={styles.avatar} />
                             <Text style={styles.employeeName}>{item.name}</Text>
-                            <Feather
-                                name={expandedId === item.id ? "chevron-up" : "chevron-down"}
-                                size={20}
-                                color="#0066FF"
-                            />
+                            {!isMobile && (
+                                <>
+                                    <Text style={styles.employeeName}>{item.job}</Text>
+                                    <Text style={styles.employeeName}>{formatData(item.admission_date, "date")}</Text>
+                                    <Text style={styles.employeeName}>{formatData(item.phone, "phone")}</Text>
+                                </>
+                            )}
+                            {isMobile && (
+                                <Feather
+                                    name={expandedId === item.id ? "chevron-up" : "chevron-down"}
+                                    size={20}
+                                    color="#0066FF"
+                                />
+                            )}
                         </TouchableOpacity>
                         {expandedId === item.id && <EmployeeDetails employee={item} />}
                     </View>

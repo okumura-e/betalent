@@ -11,6 +11,7 @@ import Header from '@/components/header';
 import EmployeesTable from '@/components/employeesTable';
 import api from '@/service/api';
 import Employee from './types';
+import { isMobile } from 'react-device-detect';
 
 export default function TabLayout() {
   const [searchText, setSearchText] = useState('');
@@ -49,19 +50,21 @@ export default function TabLayout() {
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
         <Header />
-        
-        <View>
-          <Text style={styles.title}>Funcionários</Text>
 
-          <View style={styles.searchContainer}>
-            <TextInput
-              style={styles.searchInput}
-              placeholder="Pesquisar"
-              placeholderTextColor="#999"
-              value={searchText}
-              onChangeText={setSearchText}
-            />
-            <Feather name="search" size={16} color="#DFDFDF" style={styles.searchIcon} />
+        <View>
+          <View style={styles.titleContainer}>
+            <Text style={styles.title}>Funcionários</Text>
+
+            <View style={styles.searchContainer}>
+              <TextInput
+                style={styles.searchInput}
+                placeholder="Pesquisar"
+                placeholderTextColor="#999"
+                value={searchText}
+                onChangeText={setSearchText}
+              />
+              <Feather name="search" size={16} color="#DFDFDF" style={styles.searchIcon} />
+            </View>
           </View>
 
           <EmployeesTable employees={filteredEmployees} />
