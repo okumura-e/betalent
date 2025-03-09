@@ -13,6 +13,7 @@ The goal of this project is to create an app that allows users to view and inter
 * JavaScript: the programming language used to develop the app
 * TypeScript: the programming language used to develop the app
 * React: a library of components used to develop the app
+* JSON Server: a library capable of make a fake API
 
 ## How to Start
 
@@ -23,6 +24,7 @@ Open the terminal and run the command below to install the necessary dependencie
    ```bash
    npm install
    ```
+2. Start the API in another terminal
 
 2. Start the json-server
 
